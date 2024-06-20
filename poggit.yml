@@ -1,0 +1,17 @@
+branches:
+  - master
+projects:
+  ClaimMaster:
+    path: .
+    libs:
+      - src
+    model: default
+    php:
+      - '7.4'
+    entry: src/Banshoku/Claims/Main.php
+    class: main\MainClass
+    name: ClaimMaster
+    version: 1.0.0
+    description: Plugin de protección de terrenos basado en chunks para PocketMine-MP.
+    license: mit
+    icon: icon.png
