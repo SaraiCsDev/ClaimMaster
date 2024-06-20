@@ -44,7 +44,7 @@ class ClaimCommand extends Command {
             
     if (!$sender->hasPermission("claims.admin")) {
             $sender->sendMessage(TextFormat::RED . "You do not have permission to use this command.");
-            return;
+            return false;
         }
         
         $chunkX = $sender->getPosition()->getFloorX() >> 4;
