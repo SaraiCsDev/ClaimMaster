@@ -8,6 +8,7 @@ use CortexPE\Commando\BaseSubCommand;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
+use Banshoku\Claims\Main;
 
 class ManagerSubCommand extends BaseSubCommand {
 
@@ -21,7 +22,7 @@ class ManagerSubCommand extends BaseSubCommand {
             return;
         }
 
-        $plugin = $this->getOwningPlugin();
+        $plugin = Main::getInstance();
         $claimManager = $plugin->getClaimManager();
         $claims = $claimManager->getClaims();
         $permissions = $claimManager->getPermissions();
