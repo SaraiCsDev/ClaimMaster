@@ -127,7 +127,41 @@ class ClaimCommand extends Command {
                     $sender->sendMessage(TextFormat::RED . "Usage: /claim unban <player>");
                     return false;
                 }
-                // Lógica para unban
+        $unbannedPlayerName = $args[1];
+
+        $chunkX = $sender->getPosition()->getFloorX() >> 4;
+
+        $chunkZ = $sender->getPosition()->getFloorZ() >> 4;
+
+        $chunkId = "{$chunkX}:{$chunkZ}";
+
+        $claims = $claimManager->getClaims();
+
+        if (!isset($claims[$chunkId]) || $claims[$chunkId] !== $sender->getName()) {
+
+            $sender->sendMessage(TextFormat::RED . "You do not own this chunk.");
+
+            return;
+
+        }
+
+        $bans = $claimManager->getBans();
+
+        if (isset($bans[$chunkId]) && in_array($unbannedPlayerName, $bans[$chunkId])) {
+
+            $index = array_search($unbannedPlayerName, $bans[$chunkId]);
+
+            unset($bans[$chunkId][$index]);
+
+            $claimManager->setBans($bans);
+
+            $sender->sendMessage(TextFormat::GREEN . "$unbannedPlayerName has been unbanned from this chunk.");
+
+        } else {
+
+            $sender->sendMessage(TextFormat::RED . "$unbannedPlayerName is not banned from this chunk.");
+
+        }
                 break;
 
             case "disclaim":
