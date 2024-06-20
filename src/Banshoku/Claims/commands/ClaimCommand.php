@@ -28,7 +28,7 @@ class ClaimCommand extends Command {
 
         if (!$sender instanceof Player) {
             $sender->sendMessage("This command can only be used in-game.");
-            return;
+            return false;
         }
 
         if (count($args) === 0) {
