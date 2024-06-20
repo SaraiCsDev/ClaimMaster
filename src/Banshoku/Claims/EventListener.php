@@ -75,8 +75,7 @@ class EventListener implements Listener {
             return;
         }
 
-        $permissions = $claimManager->getPermissions($chunkId);
-       if ($claims[$chunkId] !== $player->getName() && !in_array($player->getName(), $permissions)) {
+        if ($claims[$chunkId] !== $player->getName() && !in_array($player->getName(), $claimManager->getPermissions())) {
             $event->cancel();
             $player->sendMessage(TextFormat::RED . "You do not have permission to break blocks in this claim.");
         }
@@ -109,7 +108,7 @@ class EventListener implements Listener {
             return;
         }
 
-        if ($claims[$chunkId] !== $player->getName() && !in_array($player->getName(), $claimManager->getPermissions($chunkId) ?? [])) {
+        if ($claims[$chunkId] !== $player->getName() && !in_array($player->getName(), $claimManager->getPermissions())) {
             $event->cancel();
             $player->sendMessage(TextFormat::RED . "You do not have permission to place blocks in this claim.");
         }
