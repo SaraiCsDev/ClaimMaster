@@ -9,6 +9,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 use Banshoku\economy\Main as Economy;
+use Banshoku\Claims\Main;
 
 class ReclaimSubCommand extends BaseSubCommand {
 
