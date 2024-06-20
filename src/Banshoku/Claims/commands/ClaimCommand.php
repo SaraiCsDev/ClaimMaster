@@ -65,7 +65,39 @@ class ClaimCommand extends Command {
                 break;
 
             case "pvp":
-                // Lógica para pvp
+            
+        $state = strtolower($args[1]);
+
+        if ($state !== "on" && $state !== "off") {
+
+            $sender->sendMessage(TextFormat::RED . "Usage: /claim pvp <on|off>");
+
+            return;
+
+        }
+
+        $chunkX = $sender->getPosition()->getFloorX() >> 4;
+        $chunkZ = $sender->getPosition()->getFloorZ() >> 4;
+        $chunkId = "{$chunkX}:{$chunkZ}";
+
+        $claims = $claimManager->getClaims();
+
+        $pvpSettings = $claimManager->getPvpSettings();
+
+        if (!isset($claims[$chunkId]) || $claims[$chunkId] !== $sender->getName()) {
+
+            $sender->sendMessage(TextFormat::RED . "You do not own this chunk.");
+
+            return;
+
+        }
+
+        $pvpSettings[$chunkId] = $state;
+
+        $claimManager->setPvpSettings($pvpSettings);
+
+        $sender->sendMessage(TextFormat::GREEN . "PvP " . ($state === "on" ? "enabled" : "disabled") . " in your chunk.");
+            
                 break;
 
             case "border":
