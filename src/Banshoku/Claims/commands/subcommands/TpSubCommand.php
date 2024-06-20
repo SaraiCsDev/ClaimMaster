@@ -57,9 +57,9 @@ class TpSubCommand extends BaseSubCommand {
             list($chunkX, $chunkZ) = explode(":", $playerClaims[$index]);
 
             $world = $sender->getWorld();
-
-            $x = ($chunkX << 4) + 8; // Center of the chunk
-
+            $chunkX = (int) $chunkX;
+            $chunkZ = (int) $chunkZ;
+            $x = ($chunkX << 4) + 8; // Center of the chunkk
             $z = ($chunkZ << 4) + 8; // Center of the chunk
 
             $y = $world->getHighestBlockAt((int)$x, (int)$z) + 1;
