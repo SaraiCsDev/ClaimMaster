@@ -40,6 +40,9 @@ class ClaimCommand extends Command {
         $claimManager = $plugin->getClaimManager();
 
         switch ($args[0]) {
+            case "despawn":
+            //logica
+            break;
             case "reclaim":
     $chunkX = $sender->getPosition()->getFloorX() >> 4;
 
