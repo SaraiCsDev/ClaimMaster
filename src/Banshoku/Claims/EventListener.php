@@ -141,7 +141,7 @@ class EventListener implements Listener {
             return;
         }
 
-        if ($claims[$chunkId] !== $player->getName() && !in_array($player->getName(), $claimManager->getPermissions($chunkId) ?? [])) {
+        if ($claims[$chunkId] !== $player->getName() && !in_array($player->getName(), $claimManager->getPermissions())) {
             $event->cancel();
             $player->sendMessage(TextFormat::RED . "You do not have permission to interact with blocks in this claim.");
         }
