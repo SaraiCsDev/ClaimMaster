@@ -22,11 +22,11 @@
 
 ## Requisitos
 
-- PocketMine-MP versión 4.0 o superior
-- Plugin de Economía (opcional)
+- PocketMine-MP versión 5.0 o superior
+- Plugin de Economía (obligatorio)
 
 ## Contacto
 
 Para más información, soporte y colaboración, contacta a la desarrolladora Sarai:
 - Correo Electrónico: [saraicisneros313@gmail.com](mailto:saraicisneros313@gmail.com)
-- [Perfil de GitHub](https://github.com/Sarai)
+- [Perfil de GitHub](https://github.com/SaraiCsDev)
