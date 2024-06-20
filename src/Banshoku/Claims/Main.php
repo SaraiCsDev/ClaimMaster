@@ -22,7 +22,7 @@ class Main extends PluginBase {
         }
 
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
-        $this->getServer()->getCommandMap()->register("claim", new ClaimCommand($this, "claim", "Manage land claims", ["claims"], "claims.command"));
+        $this->getServer()->getCommandMap()->register("claim", new ClaimCommand($this, "claim", "Manage land claims", ["claims"]);
 
         $this->getScheduler()->scheduleRepeatingTask(new BorderTask($this), 20);
     }
