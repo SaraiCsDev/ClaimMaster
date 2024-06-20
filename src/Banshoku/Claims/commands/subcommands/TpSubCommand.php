@@ -5,16 +5,12 @@ declare(strict_types=1);
 namespace Banshoku\Claims\commands\subcommands;
 
 use CortexPE\Commando\BaseSubCommand;
-
 use CortexPE\Commando\args\IntegerArgument;
-
 use pocketmine\command\CommandSender;
-
 use pocketmine\player\Player;
-
 use pocketmine\utils\TextFormat;
-
 use pocketmine\world\Position;
+use Banshoku\Claims\Main;
 
 class TpSubCommand extends BaseSubCommand {
 
@@ -36,7 +32,7 @@ class TpSubCommand extends BaseSubCommand {
 
         $index = $args["index"] - 1;
 
-        $plugin = $this->getOwningPlugin();
+        $plugin = Main::getInstance();
 
         $claimManager = $plugin->getClaimManager();
 
