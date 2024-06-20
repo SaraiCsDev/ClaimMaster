@@ -57,7 +57,32 @@ class ClaimCommand extends Command {
                     $sender->sendMessage(TextFormat::RED . "Usage: /claim permdel <player> <permission>");
                     return false;
                 }
-                // Lógica para permdel
+        $targetName = $args[1];
+        $chunkX = $sender->getPosition()->getFloorX() >> 4;
+        $chunkZ = $sender->getPosition()->getFloorZ() >> 4;
+        $chunkId = "{$chunkX}:{$chunkZ}";
+        $claims = $claimManager->getClaims();
+        $permissions = $claimManager->getPermissions();
+
+        if (!isset($claims[$chunkId]) || $claims[$chunkId] !== $sender->getName()) {
+
+        $sender->sendMessage(TextFormat::RED . "You do not own this chunk.");
+            return;
+        }
+
+        if (!isset($permissions[$chunkId]) || !in_array($targetName, $permissions[$chunkId])) {
+            $sender->sendMessage(TextFormat::RED . "Player does not have permission in this chunk.");
+            return;
+        }
+
+        $permissions[$chunkId] = array_filter($permissions[$chunkId], function($name) use ($targetName) {
+
+            return $name !== $targetName;
+
+        });
+
+        $claimManager->setPermissions($permissions);
+        $sender->sendMessage(TextFormat::GREEN . "Removed " . $targetName . " from your chunk permissions.");
                 break;
 
             case "manager":
