@@ -77,7 +77,44 @@ class ClaimCommand extends Command {
                     $sender->sendMessage(TextFormat::RED . "Usage: /claim tp <player>");
                     return false;
                 }
-                // Lógica para tp
+            
+        $index = $args[1] - 1;
+        $claims = $claimManager->getClaims();
+        $playerName = $sender->getName();
+        $playerClaims = [];
+        foreach ($claims as $chunkId => $owner) {
+
+            if ($owner === $playerName) {
+
+                $playerClaims[] = $chunkId;
+
+            }
+
+        }
+
+        if (isset($playerClaims[$index])) {
+
+            list($chunkX, $chunkZ) = explode(":", $playerClaims[$index]);
+
+            $world = $sender->getWorld();
+            $chunkX = (int) $chunkX;
+            $chunkZ = (int) $chunkZ;
+            $x = ($chunkX << 4) + 8; // Center of the chunkk
+            $z = ($chunkZ << 4) + 8; // Center of the chunk
+
+            $y = $world->getHighestBlockAt((int)$x, (int)$z) + 1;
+
+            $position = new Position($x, $y, $z, $world);
+
+            $sender->teleport($position);
+
+            $sender->sendMessage(TextFormat::GREEN . "Teleported to your claim #" . ($index + 1) . ".");
+
+        } else {
+
+            $sender->sendMessage(TextFormat::RED . "You do not have a claim with index " . ($index + 1) . ".");
+
+        }
                 break;
 
             case "spawn":
