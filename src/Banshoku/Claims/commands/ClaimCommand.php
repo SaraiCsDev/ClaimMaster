@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Banshoku\Claims\commands;
 
 use Banshoku\Claims\commands\subcommands\ReclaimSubCommand;
