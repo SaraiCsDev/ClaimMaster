@@ -112,7 +112,7 @@ class ClaimCommand extends Command {
 
             $sender->sendMessage(TextFormat::RED . "You do not own this chunk.");
 
-            return;
+            return false;
 
         }
 
@@ -153,12 +153,12 @@ class ClaimCommand extends Command {
         if (!isset($claims[$chunkId]) || $claims[$chunkId] !== $sender->getName()) {
 
         $sender->sendMessage(TextFormat::RED . "You do not own this chunk.");
-            return;
+            return false;
         }
 
         if (!isset($permissions[$chunkId]) || !in_array($targetName, $permissions[$chunkId])) {
             $sender->sendMessage(TextFormat::RED . "Player does not have permission in this chunk.");
-            return;
+            return false;
         }
 
         $permissions[$chunkId] = array_filter($permissions[$chunkId], function($name) use ($targetName) {
@@ -194,7 +194,7 @@ class ClaimCommand extends Command {
 
             $sender->sendMessage(TextFormat::RED . "Usage: /claim pvp <on|off>");
 
-            return;
+            return false;
 
         }
 
@@ -210,7 +210,7 @@ class ClaimCommand extends Command {
 
             $sender->sendMessage(TextFormat::RED . "You do not own this chunk.");
 
-            return;
+            return false;
 
         }
 
@@ -281,7 +281,7 @@ class ClaimCommand extends Command {
             
     if (!$sender->hasPermission("claims.admin")) {
             $sender->sendMessage(TextFormat::RED . "You do not have permission to use this command.");
-            return;
+            return false;
 
         }
 
@@ -305,7 +305,7 @@ class ClaimCommand extends Command {
 
           if (!isset($claims[$chunkId]) || $claims[$chunkId] !== $sender->getName()) {
              $sender->sendMessage(TextFormat::RED . "You do not own this chunk.");
-             return;
+             return false;
            }
 
           $bans = $claimManager->getBans();
@@ -348,7 +348,7 @@ class ClaimCommand extends Command {
 
             $sender->sendMessage(TextFormat::RED . "You do not own this chunk.");
 
-            return;
+            return false;
 
         }
 
@@ -397,12 +397,12 @@ class ClaimCommand extends Command {
             
             if (!$sender->hasPermission("claims.vip")) {
             $sender->sendMessage(TextFormat::RED . "You do not have permission to use this command.");
-            return;
+            return false;
         }
 
         if ($sender->isCreative()) {
             $sender->sendMessage(TextFormat::RED . "This command cannot be used in creative mode.");
-            return;
+            return false;
         }
             
         $chunkX = $sender->getPosition()->getFloorX() >> 4;
@@ -458,7 +458,7 @@ class ClaimCommand extends Command {
 
             $sender->sendMessage(TextFormat::RED . "This chunk is not claimed.");
 
-            return;
+            return false;
 
         }
 
