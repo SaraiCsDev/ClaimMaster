@@ -8,7 +8,6 @@ use CortexPE\Commando\BaseSubCommand;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
-use Banshoku\economy\Main as Economy;
 use Banshoku\Claims\Main;
 
 class ReclaimSubCommand extends BaseSubCommand {
@@ -32,20 +31,6 @@ class ReclaimSubCommand extends BaseSubCommand {
         $plugin = Main::getInstance();
 
         $claimManager = $plugin->getClaimManager();
-
-        $cost = $plugin->getConfig()->get("claim_cost", 100);
-
-        $balance = Economy::getInstance()->getProvider()->getCoins($sender);
-
-        if ($balance < $cost) {
-
-            $sender->sendMessage(TextFormat::RED . "You do not have enough money to claim this chunk.");
-
-            return;
-
-        }
-
-        Economy::getInstance()->getProvider()->removeCoins($sender, $cost);
 
         $chunkX = $sender->getPosition()->getFloorX() >> 4;
 
