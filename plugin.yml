@@ -1,4 +1,4 @@
-name: Claims
+name: ClaimsMaster
 main: Banshoku\Claims\Main
 version: 1.0.0
 api: [5.0.0]
