@@ -1,0 +1,14 @@
+name: Claims
+main: Banshoku\Claims\Main
+version: 1.0.0
+api: [5.0.0]
+permissions:
+  claims.admin:
+    description: "Allows defining spawn chunks and bypassing spawn restrictions"
+    default: op
+  claims.vip:
+    description: "Allows VIP players to have more claims"
+    default: op
+  claims.command:
+    description: "Allows the player to use the claim commands"
+    default: true
