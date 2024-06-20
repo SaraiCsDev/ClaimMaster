@@ -9,6 +9,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\plugin\PluginBase;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
+use Banshoku\Claims\Main;
 
 class ClaimCommand extends Command {
 
@@ -34,6 +35,9 @@ class ClaimCommand extends Command {
             $sender->sendMessage(TextFormat::RED . "Usage: /claim <action>");
             return false;
         }
+
+        $plugin = Main::getInstance();
+        $claimManager = $plugin->getClaimManager();
 
         switch ($args[0]) {
             case "reclaim":
