@@ -1,0 +1,8 @@
+# config.yml
+
+maxClaims:
+  default: 1
+  vip: 4
+
+# Chunks de spawn definidos por las coordenadas de chunk
+spawnChunks: []
