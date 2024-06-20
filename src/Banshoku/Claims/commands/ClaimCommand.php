@@ -94,7 +94,7 @@ class ClaimCommand extends Command {
 
             $sender->sendMessage(TextFormat::RED . "Player not found.");
 
-            return;
+            return false;
 
         }
 
