@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Banshoku\Claims\commands\subcommands;
 
 use CortexPE\Commando\BaseSubCommand;
-
 use pocketmine\command\CommandSender;
-
 use pocketmine\player\Player;
-
 use pocketmine\utils\TextFormat;
+use Banshoku\Claims\Main;
 
 class SpawnSubCommand extends BaseSubCommand {
 
@@ -38,7 +36,7 @@ class SpawnSubCommand extends BaseSubCommand {
 
         }
 
-        $plugin = $this->getOwningPlugin();
+        $plugin = Main::getInstance();
 
         $claimManager = $plugin->getClaimManager();
 
