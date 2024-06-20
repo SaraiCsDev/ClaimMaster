@@ -41,7 +41,21 @@ class ClaimCommand extends Command {
 
         switch ($args[0]) {
             case "despawn":
-            //logica
+            
+    if (!$sender->hasPermission("claims.admin")) {
+            $sender->sendMessage(TextFormat::RED . "You do not have permission to use this command.");
+            return;
+        }
+        
+        $chunkX = $sender->getPosition()->getFloorX() >> 4;
+        $chunkZ = $sender->getPosition()->getFloorZ() >> 4;
+        $chunkId = "{$chunkX}:{$chunkZ}";
+
+        if ($claimManager->removeSpawnChunk($chunkId)) {
+            $sender->sendMessage(TextFormat::GREEN . "Chunk ({$chunkX}, {$chunkZ}) has been removed from spawn chunks.");
+        } else {
+            $sender->sendMessage(TextFormat::RED . "This chunk is not a spawn chunk.");
+        }
             break;
             case "reclaim":
     $chunkX = $sender->getPosition()->getFloorX() >> 4;
