@@ -29,23 +29,19 @@ declare(strict_types=1);
 
 namespace CortexPE\Commando\args;
 
+
 use pocketmine\command\CommandSender;
-use pocketmine\network\mcpe\protocol\AvailableCommandsPacket;
+use pocketmine\math\Vector3;
+use function preg_match;
 
-class RawStringArgument extends BaseArgument {
-	public function getNetworkType(): int {
-		return AvailableCommandsPacket::ARG_TYPE_STRING;
+class BlockPositionArgument extends Vector3Argument {
+	public function isValidCoordinate(string $coordinate, bool $locatable): bool {
+		return (bool)preg_match("/^(?:" . ($locatable ? "(?:~-|~\+)?" : "") . "-?\d+)" . ($locatable ? "|~" : "") . "$/", $coordinate);
 	}
 
-	public function getTypeName(): string {
-		return "string";
-	}
+	public function parse(string $argument, CommandSender $sender) : Vector3{
+		$v = parent::parse($argument, $sender);
 
-	public function canParse(string $testString, CommandSender $sender): bool {
-		return true;
-	}
-
-	public function parse(string $argument, CommandSender $sender) : string{
-		return $argument;
+		return $v->floor();
 	}
 }
