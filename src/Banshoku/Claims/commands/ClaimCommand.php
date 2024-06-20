@@ -70,7 +70,7 @@ class ClaimCommand extends Command {
 
             $sender->sendMessage(TextFormat::RED . "This chunk is already claimed.");
 
-            return;
+            return false;
 
         }
 
