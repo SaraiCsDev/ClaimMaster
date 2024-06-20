@@ -1,44 +1,118 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Banshoku\Claims\commands;
 
-use Banshoku\Claims\commands\subcommands\ReclaimSubCommand;
-use Banshoku\Claims\commands\subcommands\PermAddSubCommand;
-use Banshoku\Claims\commands\subcommands\PermDelSubCommand;
-use Banshoku\Claims\commands\subcommands\ManagerSubCommand;
-use Banshoku\Claims\commands\subcommands\PvpSubCommand;
-use Banshoku\Claims\commands\subcommands\BorderSubCommand;
-use Banshoku\Claims\commands\subcommands\TpSubCommand;
-use Banshoku\Claims\commands\subcommands\SpawnSubCommand;
-use Banshoku\Claims\commands\subcommands\BanSubCommand;
-use Banshoku\Claims\commands\subcommands\UnbanSubCommand;
-use Banshoku\Claims\commands\subcommands\DisclaimSubCommand;
-use Banshoku\Claims\commands\subcommands\FlySubCommand;
-use Banshoku\Claims\commands\subcommands\InfoSubCommand;
-use CortexPE\Commando\BaseCommand;
+use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\plugin\PluginBase;
+use pocketmine\player\Player;
+use pocketmine\utils\TextFormat;
 
-class ClaimCommand extends BaseCommand {
+class ClaimCommand extends Command {
 
-    protected function prepare(): void {
-        $plugin = $this->getOwningPlugin();
+    private PluginBase $plugin;
+
+    public function __construct(PluginBase $plugin) {
+        parent::__construct("claim", "Claim command with multiple actions", null, ["claim"]);
+        $this->plugin = $plugin;
         $this->setPermission("claims.command");
-        $this->registerSubCommand(new ReclaimSubCommand($plugin, "reclaim"));
-        $this->registerSubCommand(new PermAddSubCommand($plugin, "permadd"));
-        $this->registerSubCommand(new PermDelSubCommand($plugin, "permdel"));
-        $this->registerSubCommand(new ManagerSubCommand($plugin, "manager"));
-        $this->registerSubCommand(new PvpSubCommand($plugin, "pvp"));
-        $this->registerSubCommand(new BorderSubCommand($plugin, "border"));
-        $this->registerSubCommand(new TpSubCommand($plugin, "tp"));
-        $this->registerSubCommand(new SpawnSubCommand($plugin, "spawn"));
-        $this->registerSubCommand(new BanSubCommand($plugin, "ban"));
-        $this->registerSubCommand(new UnbanSubCommand($plugin, "unban"));
-        $this->registerSubCommand(new DisclaimSubCommand($plugin, "disclaim"));
-        $this->registerSubCommand(new FlySubCommand($plugin, "fly"));
-        $this->registerSubCommand(new InfoSubCommand($plugin, "info"));
     }
 
-    public function onRun(CommandSender $sender, string $aliasUsed, array $args): void {
-        $this->sendUsage();
+    public function execute(CommandSender $sender, string $label, array $args) : bool {
+        if (!$this->testPermission($sender)) {
+            return false;
+        }
+
+        if (!$sender instanceof Player) {
+            $sender->sendMessage("This command can only be used in-game.");
+            return false;
+        }
+
+        if (count($args) === 0) {
+            $sender->sendMessage(TextFormat::RED . "Usage: /claim <action>");
+            return false;
+        }
+
+        switch ($args[0]) {
+            case "reclaim":
+                // Lógica para reclaim
+                break;
+
+            case "permadd":
+                if (count($args) < 3) {
+                    $sender->sendMessage(TextFormat::RED . "Usage: /claim permadd <player> <permission>");
+                    return false;
+                }
+                // Lógica para permadd
+                break;
+
+            case "permdel":
+                if (count($args) < 3) {
+                    $sender->sendMessage(TextFormat::RED . "Usage: /claim permdel <player> <permission>");
+                    return false;
+                }
+                // Lógica para permdel
+                break;
+
+            case "manager":
+                // Lógica para manager
+                break;
+
+            case "pvp":
+                // Lógica para pvp
+                break;
+
+            case "border":
+                // Lógica para border
+                break;
+
+            case "tp":
+                if (count($args) < 2) {
+                    $sender->sendMessage(TextFormat::RED . "Usage: /claim tp <player>");
+                    return false;
+                }
+                // Lógica para tp
+                break;
+
+            case "spawn":
+                // Lógica para spawn
+                break;
+
+            case "ban":
+                if (count($args) < 2) {
+                    $sender->sendMessage(TextFormat::RED . "Usage: /claim ban <player>");
+                    return false;
+                }
+                // Lógica para ban
+                break;
+
+            case "unban":
+                if (count($args) < 2) {
+                    $sender->sendMessage(TextFormat::RED . "Usage: /claim unban <player>");
+                    return false;
+                }
+                // Lógica para unban
+                break;
+
+            case "disclaim":
+                // Lógica para disclaim
+                break;
+
+            case "fly":
+                // Lógica para fly
+                break;
+
+            case "info":
+                // Lógica para info
+                break;
+
+            default:
+                $sender->sendMessage(TextFormat::RED . "Unknown action: " . $args[0]);
+                return false;
+        }
+
+        return true;
     }
 }
