@@ -45,7 +45,7 @@ class ClaimCommand extends Command {
                 break;
 
             case "permadd":
-                if (count($args) < 3) {
+                if (count($args) < 2) {
                     $sender->sendMessage(TextFormat::RED . "Usage: /claim permadd <player> <permission>");
                     return false;
                 }
@@ -53,7 +53,7 @@ class ClaimCommand extends Command {
                 break;
 
             case "permdel":
-                if (count($args) < 3) {
+                if (count($args) < 2) {
                     $sender->sendMessage(TextFormat::RED . "Usage: /claim permdel <player> <permission>");
                     return false;
                 }
