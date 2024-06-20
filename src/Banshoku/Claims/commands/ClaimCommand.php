@@ -136,6 +136,16 @@ class ClaimCommand extends Command {
 
             case "fly":
             
+            if (!$sender->hasPermission("claims.vip")) {
+            $sender->sendMessage(TextFormat::RED . "You do not have permission to use this command.");
+            return;
+        }
+
+        if ($sender->isCreative()) {
+            $sender->sendMessage(TextFormat::RED . "This command cannot be used in creative mode.");
+            return;
+        }
+            
         $chunkX = $sender->getPosition()->getFloorX() >> 4;
 
         $chunkZ = $sender->getPosition()->getFloorZ() >> 4;
