@@ -21,7 +21,7 @@ class BorderSubCommand extends BaseSubCommand {
             return;
         }
 
-        $plugin = $this->getOwningPlugin();
+        $plugin = Main::getInstance();
         $claimManager = $plugin->getClaimManager();
 
         if ($claimManager->isBorderActive($sender)) {
