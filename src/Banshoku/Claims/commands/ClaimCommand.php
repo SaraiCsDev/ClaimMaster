@@ -131,7 +131,25 @@ class ClaimCommand extends Command {
                 break;
 
             case "disclaim":
-                // Lógica para disclaim
+       $chunkX = $sender->getPosition()->getFloorX() >> 4;
+
+        $chunkZ = $sender->getPosition()->getFloorZ() >> 4;
+
+        $chunkId = "{$chunkX}:{$chunkZ}";
+
+        $claims = $claimManager->getClaims();
+
+        if (isset($claims[$chunkId]) && $claims[$chunkId] === $sender->getName()) {
+
+            $claimManager->removeClaim($chunkId);
+
+            $sender->sendMessage(TextFormat::GREEN . "You have successfully disclaimed this chunk.");
+
+        } else {
+
+            $sender->sendMessage(TextFormat::RED . "You do not own this chunk.");
+
+        }
                 break;
 
             case "fly":
