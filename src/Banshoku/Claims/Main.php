@@ -11,9 +11,13 @@ use Banshoku\Claims\task\BorderTask;
 
 class Main extends PluginBase {
 
+    private static Main $instance;
+
     private ClaimManager $claimManager;
 
     protected function onEnable(): void {
+        self::$instance = $this;
+
         $this->saveDefaultConfig();
         $this->claimManager = new ClaimManager($this);
 
@@ -29,6 +33,10 @@ class Main extends PluginBase {
 
     public function onDisable(): void {
         $this->claimManager->saveClaimsData();
+    }
+
+    public static function getInstance(): Main {
+        return self::$instance;
     }
 
     public function getClaimManager(): ClaimManager {
