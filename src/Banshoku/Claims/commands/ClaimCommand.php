@@ -41,7 +41,27 @@ class ClaimCommand extends Command {
 
         switch ($args[0]) {
             case "reclaim":
-                // Lógica para reclaim
+    $chunkX = $sender->getPosition()->getFloorX() >> 4;
+
+        $chunkZ = $sender->getPosition()->getFloorZ() >> 4;
+
+        $chunkId = "{$chunkX}:{$chunkZ}";
+
+        $claims = $claimManager->getClaims();
+
+        if (isset($claims[$chunkId])) {
+
+            $sender->sendMessage(TextFormat::RED . "This chunk is already claimed.");
+
+            return;
+
+        }
+
+        $claims[$chunkId] = $sender->getName();
+
+        $claimManager->setClaims($claims);
+
+        $sender->sendMessage(TextFormat::GREEN . "You have successfully claimed this chunk.");
                 break;
 
             case "permadd":
