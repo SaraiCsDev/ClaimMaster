@@ -8,6 +8,7 @@ use CortexPE\Commando\BaseSubCommand;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
+use Banshoku\Claims\Main;
 
 class DespawnSubCommand extends BaseSubCommand {
 
@@ -26,7 +27,7 @@ class DespawnSubCommand extends BaseSubCommand {
             return;
         }
 
-        $plugin = $this->getOwningPlugin();
+        $plugin = Main::getInstance();
         $claimManager = $plugin->getClaimManager();
 
         $chunkX = $sender->getPosition()->getFloorX() >> 4;
