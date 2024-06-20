@@ -135,11 +135,43 @@ class ClaimCommand extends Command {
                 break;
 
             case "fly":
-                // Lógica para fly
+            
+        $chunkX = $sender->getPosition()->getFloorX() >> 4;
+
+        $chunkZ = $sender->getPosition()->getFloorZ() >> 4;
+
+        $chunkId = $chunkX . ":" . $chunkZ;
+
+        $claims = $claimManager->getClaims();
+
+        if (isset($claims[$chunkId]) && $claims[$chunkId] === $sender->getName()) {
+
+            if ($sender->getAllowFlight()) {
+
+                $sender->setFlying(false);
+
+                $sender->setAllowFlight(false);
+
+                $sender->sendMessage(TextFormat::RED . "Flight disabled.");
+
+            } else {
+
+                $sender->setAllowFlight(true);
+
+                $sender->sendMessage(TextFormat::GREEN . "Flight enabled.");
+
+            }
+
+        } else {
+
+            $sender->sendMessage(TextFormat::RED . "You can only enable flight in your own claim.");
+
+        }
                 break;
 
             case "info":
-                $chunkX = $sender->getPosition()->getFloorX() >> 4;
+            
+        $chunkX = $sender->getPosition()->getFloorX() >> 4;
 
         $chunkZ = $sender->getPosition()->getFloorZ() >> 4;
 
