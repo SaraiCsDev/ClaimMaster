@@ -1,7 +1,6 @@
 ---
 
 ## ClaimMaster
-
 ### Descripción
 
 **ClaimMaster** es un potente plugin de protección de terrenos para PocketMine-MP, diseñado para proporcionar a los jugadores la capacidad de reclamar y proteger chunks en el servidor de Minecraft. Este plugin es perfecto para prevenir el griefing y asegurar que cada jugador pueda disfrutar de su espacio seguro y personalizado.
