@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace Banshoku\Claims\commands\subcommands;
 
 use CortexPE\Commando\BaseSubCommand;
-
 use CortexPE\Commando\args\RawStringArgument;
-
 use pocketmine\command\CommandSender;
-
 use pocketmine\player\Player;
-
 use pocketmine\utils\TextFormat;
+use Banshoku\Claims\Main;
 
 class PermAddSubCommand extends BaseSubCommand {
 
@@ -32,7 +29,7 @@ class PermAddSubCommand extends BaseSubCommand {
 
         }
 
-        $plugin = $this->getOwningPlugin();
+        $plugin = Main::getInstance();
 
         $claimManager = $plugin->getClaimManager();
 
