@@ -81,7 +81,17 @@ class ClaimCommand extends Command {
                 break;
 
             case "spawn":
-                // Lógica para spawn
+            
+    if (!$sender->hasPermission("claims.admin")) {
+            $sender->sendMessage(TextFormat::RED . "You do not have permission to use this command.");
+            return;
+
+        }
+
+        $chunkX = $sender->getPosition()->getFloorX() >> 4;
+        $chunkZ = $sender->getPosition()->getFloorZ() >> 4;
+        $claimManager->addSpawnChunk($chunkX, $chunkZ);
+        $sender->sendMessage(TextFormat::GREEN . "Chunk ({$chunkX}, {$chunkZ}) has been added as a spawn chunk.");
                 break;
 
             case "ban":
