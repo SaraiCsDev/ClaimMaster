@@ -49,7 +49,56 @@ class ClaimCommand extends Command {
                     $sender->sendMessage(TextFormat::RED . "Usage: /claim permadd <player> <permission>");
                     return false;
                 }
-                // Lógica para permadd
+        $targetName = $args[1];
+
+        $target = $plugin->getServer()->getPlayerByPrefix($targetName);
+
+        if ($target === null) {
+
+            $sender->sendMessage(TextFormat::RED . "Player not found.");
+
+            return;
+
+        }
+
+        $chunkX = $sender->getPosition()->getFloorX() >> 4;
+
+        $chunkZ = $sender->getPosition()->getFloorZ() >> 4;
+
+        $chunkId = "{$chunkX}:{$chunkZ}";
+
+        $claims = $claimManager->getClaims();
+
+        $permissions = $claimManager->getPermissions();
+
+        if (!isset($claims[$chunkId]) || $claims[$chunkId] !== $sender->getName()) {
+
+            $sender->sendMessage(TextFormat::RED . "You do not own this chunk.");
+
+            return;
+
+        }
+
+        if (!isset($permissions[$chunkId])) {
+
+            $permissions[$chunkId] = [];
+
+        }
+
+        if (!in_array($target->getName(), $permissions[$chunkId])) {
+
+            $permissions[$chunkId][] = $target->getName();
+
+            $claimManager->setPermissions($permissions);
+
+            $sender->sendMessage(TextFormat::GREEN . "Added " . $target->getName() . " to your chunk permissions.");
+
+        } else {
+
+            $sender->sendMessage(TextFormat::RED . "Player already has permissions for this chunk.");
+
+        }
+            
                 break;
 
             case "permdel":
