@@ -61,7 +61,18 @@ class ClaimCommand extends Command {
                 break;
 
             case "manager":
-                // Lógica para manager
+       $claims = $claimManager->getClaims();
+        $permissions = $claimManager->getPermissions();
+
+        $senderName = $sender->getName();
+        $sender->sendMessage(TextFormat::GREEN . "Claim Manager:");
+
+        foreach ($claims as $chunkId => $owner) {
+            if ($owner === $senderName) {
+                $sender->sendMessage(TextFormat::YELLOW . "Claim: " . $chunkId);
+                $sender->sendMessage(TextFormat::YELLOW . "Permissions: " . implode(", ", $permissions[$chunkId] ?? []));
+            }
+        }
                 break;
 
             case "pvp":
