@@ -89,7 +89,36 @@ class ClaimCommand extends Command {
                     $sender->sendMessage(TextFormat::RED . "Usage: /claim ban <player>");
                     return false;
                 }
-                // Lógica para ban
+                $chunkX = $sender->getPosition()->getFloorX() >> 4;
+                $chunkZ = $sender->getPosition()->getFloorZ() >> 4;
+                $chunkId = $chunkX . ":" . $chunkZ;
+
+                $claims = $claimManager->getClaims();
+
+          if (!isset($claims[$chunkId]) || $claims[$chunkId] !== $sender->getName()) {
+             $sender->sendMessage(TextFormat::RED . "You do not own this chunk.");
+             return;
+           }
+
+          $bans = $claimManager->getBans();
+
+         if (!isset($bans[$chunkId])) {
+             $bans[$chunkId] = [];
+         }
+
+        if (!in_array($bannedPlayerName, $bans[$chunkId])) {
+            $bans[$chunkId][] = $bannedPlayerName;
+            $claimManager->setBans($bans);
+            $sender->sendMessage(TextFormat::GREEN . "$bannedPlayerName has been banned from this chunk.");
+            
+            // Expulsar al jugador si está en el chunk
+            $bannedPlayer = $plugin->getServer()->getPlayerByPrefix($bannedPlayerName);
+            if ($bannedPlayer instanceof Player) {
+                $claimManager->checkPlayerBans($bannedPlayer);
+            }
+        } else {
+            $sender->sendMessage(TextFormat::RED . "$bannedPlayerName is already banned from this chunk.");
+        }
                 break;
 
             case "unban":
