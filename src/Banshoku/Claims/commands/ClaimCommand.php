@@ -69,7 +69,13 @@ class ClaimCommand extends Command {
                 break;
 
             case "border":
-                // Lógica para border
+        if ($claimManager->isBorderActive($sender)) {
+            $claimManager->setBorderActive($sender, false);
+            $sender->sendMessage(TextFormat::RED . "Border display deactivated.");
+        } else {
+            $claimManager->setBorderActive($sender, true);
+            $sender->sendMessage(TextFormat::GREEN . "Border display activated.");
+            }
                 break;
 
             case "tp":
