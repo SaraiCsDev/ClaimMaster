@@ -89,6 +89,7 @@ class ClaimCommand extends Command {
                     $sender->sendMessage(TextFormat::RED . "Usage: /claim ban <player>");
                     return false;
                 }
+                 $bannedPlayerName = $args[1];
                 $chunkX = $sender->getPosition()->getFloorX() >> 4;
                 $chunkZ = $sender->getPosition()->getFloorZ() >> 4;
                 $chunkId = $chunkX . ":" . $chunkZ;
